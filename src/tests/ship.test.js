@@ -16,10 +16,19 @@ test('does not allow hitting the same block twice', () => {
 });
 
 test('returns block on successful hit', () => {
-  expect(cruiser.hit(3)).toBe(3);
+  expect(cruiser.hit(0)).toBe(0);
 });
 
 test('sinking', () => {
-  cruiser.hit(3);
+  cruiser.hit(0);
   expect(cruiser.isSunk()).toBe(true);
+});
+
+test('dafault alignment is horizontal', () => {
+  expect(cruiser.getAlignment()).toBe('h');
+});
+
+test('changing of alignment', () => {
+  cruiser.toggleAlignment();
+  expect(cruiser.getAlignment()).toBe('v');
 });

@@ -4,6 +4,12 @@ const ship = (length) => {
     shipBlocks.push(1);
   }
 
+  let alignment = 'h';
+  function toggleAlignment() {
+    alignment = (alignment === 'h') ? 'v' : 'h';
+  }
+  const getAlignment = () => alignment;
+
   let damage = 0;
 
   function isSunk() {
@@ -11,12 +17,14 @@ const ship = (length) => {
   }
 
   function hit(coord) {
-    if (shipBlocks[coord - 1] === 0) {
-      return 'invalid hit';
-    }
+    if (coord > length - 1) return 'invalid hit';
+
+    if (damage === length) return 'invalid hit';
+
+    if (shipBlocks[coord] === 0) return 'invalid hit';
 
     if (damage < length) {
-      shipBlocks[coord - 1] = 0;
+      shipBlocks[coord] = 0;
       damage += 1;
       return coord;
     }
@@ -28,6 +36,8 @@ const ship = (length) => {
     length,
     isSunk,
     hit,
+    getAlignment,
+    toggleAlignment,
   };
 };
 
