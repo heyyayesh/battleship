@@ -1,4 +1,4 @@
-const ship = (length) => {
+const ship = (length, name) => {
   const shipBlocks = [];
   for (let i = 0; i < length; i += 1) {
     shipBlocks.push(1);
@@ -33,6 +33,7 @@ const ship = (length) => {
   }
 
   return {
+    name,
     length,
     isSunk,
     hit,

@@ -2,9 +2,13 @@ import ship from '../ship';
 
 let cruiser;
 beforeEach(() => {
-  cruiser = ship(3);
+  cruiser = ship(3, 'cruiser');
   cruiser.hit(1);
   cruiser.hit(2);
+});
+
+test('name of the ship', () => {
+  expect(cruiser.name).toBe('cruiser');
 });
 
 test('length of the ship', () => {

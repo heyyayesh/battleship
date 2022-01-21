@@ -37,11 +37,11 @@ const gameBoard = () => {
     const len = ship.length;
 
     // doesn't allow placing beyond the board
-    if ((ship.getAlignment() === 'h' && x > 10 - len) || y > 10) {
+    if ((ship.getAlignment() === 'h' && x > 10 - len) || y > 9) {
       return 'failed';
     }
 
-    if ((ship.getAlignment() === 'v' && y > 10 - len) || x > 10) {
+    if ((ship.getAlignment() === 'v' && y > 10 - len) || x > 9) {
       return 'failed';
     }
 
@@ -55,7 +55,7 @@ const gameBoard = () => {
         gameBoardArr[x + i][y].shipBlock = i;
         gameBoardArr[x + i][y].hasShip = true;
       }
-      return 'success';
+      return `success ${ship.getAlignment()}`;
     }
 
     if (ship.getAlignment() === 'v') {
@@ -64,10 +64,10 @@ const gameBoard = () => {
         gameBoardArr[x][y + i].shipBlock = i;
         gameBoardArr[x][y + i].hasShip = true;
       }
-      return 'success';
+      return `success ${ship.getAlignment()}`;
     }
 
-    return 'failed';
+    return 'could not place';
   }
 
   // helper function that checks if a block is empty
@@ -90,11 +90,40 @@ const gameBoard = () => {
     return gameBoardArr[x][y];
   }
 
+  // returns total no of ship blocks on the board
+  function getTotalShipBlocks() {
+    let counter = 0;
+    for (let i = 0; i < 10; i += 1) {
+      for (let j = 0; j < 10; j += 1) {
+        // eslint-disable-next-line no-continue
+        if (!gameBoardArr[i][j].hasShip) continue;
+        counter += 1;
+      }
+    }
+    return counter;
+  }
+
+  // checks if all the ships on the board have been sunk
+  function isAllSunk() {
+    let sinkCounter = 0;
+    for (let i = 0; i < 10; i += 1) {
+      for (let j = 0; j < 10; j += 1) {
+        // eslint-disable-next-line no-continue
+        if (!gameBoardArr[i][j].hasShip) continue;
+        if ((gameBoardArr[i][j].vehicle).isSunk()) sinkCounter += 1;
+      }
+    }
+
+    return (getTotalShipBlocks() === sinkCounter);
+  }
+
   return {
     getStatus,
     placeShip,
     clearBoard,
     recieveAttack,
+    getTotalShipBlocks,
+    isAllSunk,
   };
 };
 
