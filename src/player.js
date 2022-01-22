@@ -14,7 +14,7 @@ const player = (name) => {
   const board = gameBoard();
 
   function hasLost() {
-    return fleet.every((sh) => sh.isSunk);
+    return fleet.every((sh) => sh.isSunk());
   }
 
   function randomizeShips() {
@@ -75,12 +75,22 @@ const player = (name) => {
     placeVehicle(destroyer);
   }
 
+  function attack(x, y, opponent) {
+    opponent.board.recieveAttack(x, y);
+  }
+
+  function recieveAttack(x, y) {
+    board.recieveAttack(x, y);
+  }
+
   return {
     playerName,
     fleet,
     board,
     hasLost,
     placeFleetRandomly,
+    attack,
+    recieveAttack,
   };
 };
 

@@ -87,3 +87,18 @@ test('there must be a destroyer', () => {
 
   expect(isPresent).toBe(true);
 });
+
+test('player is not lost at the beginning', () => {
+  expect(p.hasLost()).toBe(false);
+});
+
+test('player loses if all ships sink', () => {
+  for (let i = 0; i < 10; i += 1) {
+    for (let j = 0; j < 10; j += 1) {
+      if (!p.board.getStatus(i, j).hasShip) continue;
+      p.recieveAttack(i, j);
+    }
+  }
+
+  expect(p.hasLost()).toBe(true);
+});
