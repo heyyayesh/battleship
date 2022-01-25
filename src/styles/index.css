@@ -1,0 +1,172 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.content{
+  display: flex;
+  gap: 300px;
+  margin: 50px;
+}
+
+.board{
+  width: 502px;
+  height: 502px;
+  border: 1px solid;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.block{
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+}
+
+.miss{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.miss::before{
+  content: "";
+  background: black;
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+}
+
+.hit{
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hit::before, .hit::after{
+  content: "";
+  background: black;
+  position: absolute;
+  width: 90%;
+  height: 5px;
+}
+
+.hit::before{
+  transform: rotate(45deg);
+}
+
+.hit::after{
+  transform: rotate(-45deg);
+}
+
+.sunk{
+  opacity: 0.5;
+}
+
+.carrier{
+  background: rgb(218, 94, 94);
+}
+
+.battleship{
+  background: rgb(185, 70, 185);
+}
+
+.cruiser{
+  background: yellow;
+}
+
+.submarine{
+  background: rgb(101, 197, 230);
+}
+
+.destroyer{
+  background: rgb(20, 207, 20);
+}
+
+.game-over{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: white;
+  z-index: 1;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.game-over-text{
+  font-size: 42px;
+  font-family: monospace, sans-serif;
+}
+
+.winner-text{
+  font-size: 32px;
+  font-family: monospace, sans-serif;
+}
+
+.controls{
+  display: flex;
+  gap: 20px;
+}
+
+.game-over button{
+  font-size: 22px;
+  font-family: monospace, sans-serif;
+  padding: 5px 10px;
+}
+
+.game-over.active{
+  display: flex;
+}
+
+#restart{
+  position: absolute;
+  font-size: 22px;
+  font-family: monospace, sans-serif;
+  top: 20px;
+  right: 20px;
+  padding: 5px 15px;
+}
+
+@media screen and (max-width: 1000px){
+  .content{
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .board{
+    width: 302px;
+    height: 302px;
+  }
+
+  .block{
+    width: 30px;
+    height: 30px;
+  }
+
+  #restart{
+    font-size: 16px;
+  }
+}

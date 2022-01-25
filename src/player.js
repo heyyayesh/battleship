@@ -80,7 +80,7 @@ const player = (name) => {
   }
 
   function recieveAttack(x, y) {
-    board.recieveAttack(x, y);
+    return board.recieveAttack(x, y);
   }
 
   return {

@@ -77,12 +77,14 @@ const gameBoard = () => {
 
   // takes a pair of coords and attacks that block
   function recieveAttack(x, y) {
+    if (gameBoardArr[x][y].isHit || gameBoardArr[x][y].isMissed) return 'invalid';
     if (isBlockEmpty(x, y)) {
       gameBoardArr[x][y].isMissed = true;
     } else {
       (gameBoardArr[x][y].vehicle).hit(gameBoardArr[x][y].shipBlock);
       gameBoardArr[x][y].isHit = true;
     }
+    return 'success';
   }
 
   // returns the status of a block
